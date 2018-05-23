@@ -1,16 +1,23 @@
 from socket import *
 from time import time
+from sys import argv
 
-targetHost = "193.11.185.60"
+
+duration = int(argv[1])
+package_per_sec = int(argv[2])
+targetHost = argv[3]
 targetPort = 12000
+
+print("Duration: "    + argv[1] + ", "
+    + "Packages/s: "  + argv[2] + ", "
+    + "Target: "      + argv[3] + "\n")
 
 client = socket(AF_INET, SOCK_STREAM)
 counter = 0
 payload = ";" + "".zfill(94)
 
-packageDelay = 1/10
+packageDelay = 1/package_per_sec
 
-duration = 15
 now = time()
 endTime = now + duration
 nextPackageTime = now + packageDelay
